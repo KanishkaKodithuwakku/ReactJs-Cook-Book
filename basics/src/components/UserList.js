@@ -3,42 +3,35 @@ import PropTypes from "prop-types";
 import UserListItem from "./UserListItem";
 import EmptyMessage from "./EmptyMessage";
 
-const UserList = ({ users }) => {
+const UserList = ({ users, onRemoveUser }) => {
+  //  const usersElement = users.map((user) => {
+  //    return <UserListItem key={user.id} user={user} />;
+  //  });
+  //const renderElement = users.length ? usersElement : <p>No Users</p>;
 
+  const renderElement = users.length ? (
+    users.map((user) => (
+      <UserListItem key={user.id} {...user} onRemoveUser={onRemoveUser} />
+    ))
+  ) : (
+    <EmptyMessage message="No Users" type="info" />
+  );
 
-    //  const usersElement = users.map((user) => {
-    //    return <UserListItem key={user.id} user={user} />;
-    //  });
-    //const renderElement = users.length ? usersElement : <p>No Users</p>;
+  return (
+    /**
+     * This is one way but the disadvantage here is we can not use conditions like if, so better use
+     * a veriable instead.
+     */
+    //   <div>
+    //     {users.map((user) => {
+    //       return <UserListItem key={user.id} />;
+    //     })}
+    //   </div>
 
-
-    const renderElement = users.length ? (
-      users.map((user) => {
-          return <UserListItem key={user.id} {...user} />;
-      })
-    ) : (
-      <EmptyMessage message="No Users" type="info"/>
-    );
-
-
-    return (
-      /**
-       * This is one way but the disadvantage here is we can not use conditions like if, so better use
-       * a veriable instead.
-       */
-      //   <div>
-      //     {users.map((user) => {
-      //       return <UserListItem key={user.id} />;
-      //     })}
-      //   </div>
-
-      <div>
-        <ul className="list-group">
-         {renderElement}
-        </ul>
-        
-      </div>
-    );
+    <div>
+      <ul className="list-group">{renderElement}</ul>
+    </div>
+  );
 };
 
 UserList.propTypes = {

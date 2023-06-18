@@ -4,6 +4,7 @@ import Header from "./Layouts/Header";
 import SearchBar from "./SearchBar";
 import { v4 as uuidv4 } from "uuid";
 import UserList from "./UserList";
+import LabelInput from "./LabelInput";
 class App extends Component {
   /**
    * The constructor method in React components is used for initializing the component's state
@@ -82,12 +83,20 @@ class App extends Component {
       ],
     };
     this.handleOnchangeSearch = this.handleOnchangeSearch.bind(this);
+    this.removeUser = this.removeUser.bind(this);
   }
 
   handleOnchangeSearch = (e) => {
     this.setState({ searchText: e.target.value });
 
     console.log(this.state.searchText);
+  };
+
+  removeUser = (userId) => {
+    console.log(userId);
+    this.setState((prevState) => ({
+      users: prevState.users.filter((user) => user.id !== userId),
+    }));
   };
 
   render() {
@@ -98,7 +107,9 @@ class App extends Component {
 
     const { users, searchText } = this.state;
 
-    const filterdUsers = users.filter((user) =>user.name.toLowerCase().indexOf(searchText.toLowerCase()))
+    const filterdUsers = users.filter((user) =>
+      user.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1
+    );
 
     return (
       <Layout>
@@ -107,7 +118,10 @@ class App extends Component {
           value={searchText}
           handleOnchangeSearch={this.handleOnchangeSearch}
         />
-        <UserList users={filterdUsers} />
+
+        <LabelInput label="Name" placeholder="Name..." />
+
+        <UserList users={filterdUsers} onRemoveUser={this.removeUser} />
       </Layout>
     );
   }

@@ -1,20 +1,14 @@
 import React from "react";
+import LabelInput from "./LabelInput";
 
+const SearchBar = ({ value, handleOnchangeSearch }) => {
+  return (
+    <LabelInput
+      placeholder="Search..."
+      onChange={handleOnchangeSearch}
+      value={value}
+    />
+  );
+};
 
-const SearchBar = ({ value, handleOnchangeSearch }) => { 
-
-    return (
-      <div className="form-group">
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Search..."
-          onChange={handleOnchangeSearch}
-          value={value}
-        />
-      </div>
-    );
-
-}
-
-export default SearchBar;;
+export default SearchBar;
