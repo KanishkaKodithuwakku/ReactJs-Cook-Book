@@ -10,6 +10,21 @@ const Sidebar = ({cols}) => {
         <ListItem>Users</ListItem>
         <ListItem>Add New User</ListItem>
       </ListBody>
+
+      <ListBody>
+        <ListItem itemStatus="active">Menu</ListItem>
+        <ListItem>Users</ListItem>
+        <ListItem>Add New User</ListItem>
+        <ListItem>Add New User</ListItem>
+        <ListItem>Add New User</ListItem>
+      </ListBody>
+
+      <ListBody>
+        <ListItem itemStatus="active">Menu</ListItem>
+        <ListItem>Users</ListItem>
+        <ListItem>Add New User</ListItem>
+        <ListItem>Add New User</ListItem>
+      </ListBody>
     </aside>
   );
 };
