@@ -4,6 +4,7 @@ import Layout from "./Layout/Layout";
 import ListBody from "./ListGroup/ListBody";
 import UserForm from "./Form/UserForm";
 import SearchBar from "./Form/SearchBar";
+import Spinner from "./Spinner";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +31,7 @@ class App extends Component {
       this.setState({ users: response.data });
       this.setState({ loading: false });
     } catch (error) {
-      console.error("Error retrieving user data:", error);
+      console.error("Error fetching user data:", error);
       throw error;
     }
   }
@@ -59,7 +60,7 @@ class App extends Component {
   }
 
   render() {
-    const { users, searchText } = this.state;
+    const { users, searchText,loading } = this.state;
     const filterdUsers = users.filter(
       (user) => user.fname.toLowerCase().indexOf(searchText.toLowerCase()) > -1
     );
@@ -71,6 +72,8 @@ class App extends Component {
           value={searchText}
           handleOnChangeSearch={this.handleOnChangeSearch}
         />
+
+        <Spinner type=" text-danger" showSpinner={loading} />
         <ListBody users={filterdUsers} handleOnClick={this.handleOnClick} />
       </Layout>
     );
